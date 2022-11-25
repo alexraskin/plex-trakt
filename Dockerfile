@@ -8,4 +8,6 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY ./plex_trakt /code/plex_trakt
 
-CMD ["uvicorn", "plex_trakt.server:app", "--host", "0.0.0.0", "--port", "80"]
+EXPOSE 8000
+
+CMD ["uvicorn", "plex_trakt.server:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -1,16 +1,11 @@
-FROM python:3.10.8
+ FROM python:3.10.8
 
-ENV PIP_DISABLE_PIP_VERSION_CHECK=on
+WORKDIR /code
 
-RUN pip install poetry
+COPY ./requirements.txt /code/requirements.txt
 
-COPY . .
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
-COPY poetry.lock pyproject.toml ./
+COPY ./plex_trakt /code/plex_trakt
 
-RUN poetry config virtualenvs.create false
-RUN poetry install --no-interaction
-
-EXPOSE 8000
-
-CMD ["uvicorn", "plex_trakt.server:app", "--port", "8000"]
+CMD ["uvicorn", "plex_trakt.server:app", "--host", "0.0.0.0", "--port", "80"]

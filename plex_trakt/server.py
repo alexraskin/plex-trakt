@@ -12,7 +12,7 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World"}
 
-@app.post("/webhook")
+@app.post("/webhook/")
 async def webhook(request: Request):
     print(request.query_params)
     print(request.headers)
